@@ -31,9 +31,9 @@ double dividir(double primero, double segundo){
 	resultado = primero / segundo;
 	return resultado;
 }
-long factorial(unsigned numero){
+long long factorial(unsigned numero){
 
-	long resultado=1;
+	long long resultado=1;
 	unsigned contador=0;
 
 	if(numero==0 || numero==1){
