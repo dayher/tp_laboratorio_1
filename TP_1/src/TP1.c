@@ -4,7 +4,7 @@
  Author      : Dayher Marchan
  Version     :
  Copyright   : 
- Description : Hello World in C, Ansi-style
+ Description : Calculadora básica
  ============================================================================
  */
 
@@ -14,15 +14,32 @@
 
 int main(void) {
 	double primero, segundo;
-	puts("Ingresar 1er operando A=");
+
+	printf("Ingresar 1er operando A = ");
 	scanf("%lf",&primero);
-	puts("\nIngresar 2do operando B=");
+	printf("Ingresar 2do operando B = ");
 	scanf("%lf",&segundo);
+
+	printf("\nA = %f\t B = %f",primero,segundo);
+
 	printf("\nEl resultado de A+B es: %lf",sumar(primero,segundo));
 	printf("\nEl resultado de A-B es: %lf",restar(primero,segundo));
 	printf("\nEl resultado de A*B es: %lf",multiplicar(primero,segundo));
-	printf("\nEl resultado de A/B es: %lf",dividir(primero,segundo));
-	printf("\nEl factorial de %Ld y ",factorial((unsigned)primero));
-	printf("El factorial de %u \n",(unsigned)segundo);
+	if (segundo){
+		printf("\nEl resultado de A/B es: %lf",dividir(primero,segundo));
+	} else {
+		printf("\nNo es posible dividir por cero");
+	}
+	if(primero-(unsigned)primero || primero<0){
+		printf("\nEl factorial solo está definido para el conjunto de números naturales");
+	} else {
+		printf("\nEl factorial de A es: %Ld",factorial((unsigned)primero));
+	}
+	if(segundo-(unsigned)segundo || segundo<0){
+		printf("\nEl factorial solo está definido para el conjunto de números naturales");
+	} else {
+		printf("\nEl factorial de B es: %Ld\n",factorial((unsigned)segundo));
+	}
+
 	return EXIT_SUCCESS;
 }
