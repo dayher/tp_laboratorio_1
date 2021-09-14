@@ -30,13 +30,13 @@ int main(void) {
 	} else {
 		printf("\nNo es posible dividir por cero");
 	}
-	if(primero-(unsigned)primero || primero<0){
-		printf("\nEl factorial solo está definido para el conjunto de números naturales");
+	if(primero-(unsigned)primero || primero<0 || primero>15){
+		printf("\nA No es un número natural entre 0 y 15");
 	} else {
 		printf("\nEl factorial de A es: %Ld",factorial((unsigned)primero));
 	}
-	if(segundo-(unsigned)segundo || segundo<0){
-		printf("\nEl factorial solo está definido para el conjunto de números naturales");
+	if(segundo-(unsigned)segundo || segundo<0 || segundo>15){
+		printf("\nB No es un número natural entre 0 y 15");
 	} else {
 		printf("\nEl factorial de B es: %Ld\n",factorial((unsigned)segundo));
 	}
