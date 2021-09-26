@@ -16,14 +16,14 @@
 #define ELEMENTS 3
 int main(void) {
 	int r;
-	char * names[]={"Dayher","Marchan","Gabriel","Gonzalez","Samanta","Callejas"};
+	char * names[]={"Dayher","Gonzalez","Gabriel","Gonzalez","Samanta","Callejas"};
 	Employee arrayEmployees[ELEMENTS];
 	r = initEmployees(arrayEmployees, ELEMENTS);
-	addEmployee(arrayEmployees,ELEMENTS,names[0],names[1],350.5,2);
-	addEmployee(arrayEmployees,ELEMENTS,names[2],names[3],530.5,3);
+	addEmployee(arrayEmployees,ELEMENTS,names[0],names[1],350.5,3);
+	addEmployee(arrayEmployees,ELEMENTS,names[2],names[3],530.5,2);
 	addEmployee(arrayEmployees,ELEMENTS,names[4],names[5],550.5,1);
 	//r = removeEmployee(arrayEmployees, ELEMENTS,20);
-	//r = sortEmployeeByName(arrayEmployees, ELEMENTS, 1);
+	r = sortEmployees(arrayEmployees, ELEMENTS, 1);
 	r = printEmployees(arrayEmployees, ELEMENTS);
 	return EXIT_SUCCESS;
 }

@@ -68,7 +68,11 @@ pointer received or employee not found]
 */
 int findEmployeeById(Employee* list, int len,int id)
 {
-return 0;
+	if(list==NULL ||len<1 ) return -1;
+	for(int i=0; i<len; i++){
+		if(list[i].id==id) return i;
+	}
+return -1;
 }
 
 /** \brief Remove a Employee by Id (put isEmpty Flag in 1)
@@ -82,6 +86,13 @@ find a employee] - (0) if Ok
 */
 int removeEmployee(Employee* list, int len, int id)
 {
+	if(list==NULL ||len<1 ) return -1;
+		for(int i=0; i<len; i++){
+			if(list[i].id==id) {
+				list[i].isEmpty=1;
+				return 0;
+			}
+		}
 return -1;
 }
 
@@ -96,6 +107,25 @@ indicate UP or DOWN order
 */
 int sortEmployees(Employee* list, int len, int order)
 {
+	Employee temp;
+	if(list==NULL ||len<1 ) return -1;
+	for(int i=1; i<len; i++){
+		for(int j=0; j<len-i; j++){
+			if(strcmp(list[j].lastName,list[j+1].lastName)>0){
+				temp=list[j];
+				list[j]=list[j+1];
+				list[j+1]=temp;
+			} else{
+				if(strcmp(list[j].lastName,list[j+1].lastName)==0){
+					if(list[j].sector>list[j+1].sector){
+						temp=list[j];
+						list[j]=list[j+1];
+						list[j+1]=temp;
+					}
+				}
+			}
+		}
+	}
 return 0;
 }
 
@@ -108,6 +138,7 @@ return 0;
 */
 int printEmployees(Employee* list, int len)
 {
+	if(list==NULL ||len<1 ) return -1;
 	for(int i=0;i<len;i++){
 		printf("{id: %04d, salary: %.2f, sector: %02d, lastName: %s, name: %s}\n",list[i].id,list[i].salary,list[i].sector,list[i].lastName,list[i].name);
 	}
