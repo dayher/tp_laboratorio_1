@@ -13,14 +13,18 @@
 #include <stdlib.h>
 #include "ArrayEmployees.h"
 
-#define ELEMENTS 1000
-
+#define ELEMENTS 3
 int main(void) {
 	int r;
+	char * names[]={"Dayher","Marchan","Gabriel","Gonzalez","Samanta","Callejas"};
+	Employee arrayEmployees[ELEMENTS];
 	r = initEmployees(arrayEmployees, ELEMENTS);
-	r = removeEmployee(arrayEmployees, ELEMENTS,20);
-	r = sortEmployeeByName(arrayEmployees, ELEMENTS, 1);
+	addEmployee(arrayEmployees,ELEMENTS,names[0],names[1],350.5,2);
+	addEmployee(arrayEmployees,ELEMENTS,names[2],names[3],530.5,3);
+	addEmployee(arrayEmployees,ELEMENTS,names[4],names[5],550.5,1);
+	//r = removeEmployee(arrayEmployees, ELEMENTS,20);
+	//r = sortEmployeeByName(arrayEmployees, ELEMENTS, 1);
 	r = printEmployees(arrayEmployees, ELEMENTS);
 	return EXIT_SUCCESS;
 }
-https://onlinegdb.com/75njo7rbFg
+//https://onlinegdb.com/75njo7rbFg

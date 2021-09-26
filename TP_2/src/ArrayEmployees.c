@@ -5,7 +5,10 @@
  *      Author: dayher
  */
 
-#include "ArrayEmployees.h";
+#include "ArrayEmployees.h"
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 /** \brief 	To indicate that all position in the array are empty,
 *			this function put the flag (isEmpty) in TRUE in all
@@ -17,6 +20,10 @@
 */
 int initEmployees(Employee* list, int len)
 {
+	if(list==NULL ||len<1 ) return -1;
+	for(int i=0; i<len; i++){
+		list[i].isEmpty=1;
+	}
 return 0;
 }
 
@@ -33,9 +40,20 @@ return 0;
 * \return 	int Return (-1) if Error [Invalid length or NULL pointer or without
 *			free space] - (0) if Ok
 */
-int addEmployee(Employee* list, int len, int id, char name[],char
-lastName[],float salary,int sector)
+int addEmployee(Employee* list, int len, char name[],char lastName[],float salary,int sector)
 {
+	if(list==NULL ||len<1 ) return -1;
+	for(int i=0;i<len;i++){
+		if(list[i].isEmpty){
+			list[i].id=i+1;
+			strcpy(list[i].lastName,lastName);
+			strcpy(list[i].name,name);
+			list[i].salary=salary;
+			list[i].sector=sector;
+			list[i].isEmpty=0;
+			return 0;
+		}
+	}
 return -1;
 }
 
@@ -50,7 +68,7 @@ pointer received or employee not found]
 */
 int findEmployeeById(Employee* list, int len,int id)
 {
-return NULL
+return 0;
 }
 
 /** \brief Remove a Employee by Id (put isEmpty Flag in 1)
@@ -88,7 +106,10 @@ return 0;
 * \return int
 *
 */
-int printEmployees(Employee* list, int length)
+int printEmployees(Employee* list, int len)
 {
-return 0;
+	for(int i=0;i<len;i++){
+		printf("{id: %04d, salary: %.2f, sector: %02d, lastName: %s, name: %s}\n",list[i].id,list[i].salary,list[i].sector,list[i].lastName,list[i].name);
+	}
+	return 0;
 }
