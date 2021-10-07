@@ -74,8 +74,6 @@ int main(void) {
 			break;
 		}
 	}
-	//r = removeEmployee(arrayEmployees, ELEMENTS,20);
-	sortEmployees(arrayEmployees, ELEMENTS, 1);
 
 	return EXIT_SUCCESS;
 }

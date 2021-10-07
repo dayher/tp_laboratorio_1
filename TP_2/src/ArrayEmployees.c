@@ -90,12 +90,10 @@ int removeEmployee(Employee* list, int len, int id)
 	int index;
 	if(list==NULL ||len<1 ) return -1;
 	index = findEmployeeById(list, len , id);
-	if(index>0){
-		list[index].isEmpty=1;
-		return 0;
-	}
-
-return -1;
+	if(index<0)
+		return -1;
+	list[index].isEmpty=1;
+	return 0;
 }
 
 /** \brief Sort the elements in the array of employees, the argument order
