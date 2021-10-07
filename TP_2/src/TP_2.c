@@ -12,19 +12,74 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ArrayEmployees.h"
+#include "utn.h"
 
 #define ELEMENTS 3
+#define ALTA 1
+#define BAJA 2
+#define MODIFICACION 3
+#define ORDENAR 4
+#define LISTAR 5
+#define SALIR 0
+
 int main(void) {
-	int r;
-	char * names[]={"Dayher","Gonzalez","Gabriel","Gonzalez","Samanta","Callejas"};
+	size_t opcion;
+	int newId=1000;
+
 	Employee arrayEmployees[ELEMENTS];
-	r = initEmployees(arrayEmployees, ELEMENTS);
-	addEmployee(arrayEmployees,ELEMENTS,names[0],names[1],350.5,3);
-	addEmployee(arrayEmployees,ELEMENTS,names[2],names[3],530.5,2);
-	addEmployee(arrayEmployees,ELEMENTS,names[4],names[5],550.5,1);
+	initEmployees(arrayEmployees, ELEMENTS);
+
+	//MENU
+	while(opcion!=SALIR){
+		printf("\n"
+				"%d) ALTA\n"
+				"%d) BAJA\n"
+				"%d) MODIFICACION\n"
+				"%d) ORDENAR\n"
+				"%d) LISTAR\n"
+				"%d) SALIR\n",
+				ALTA,BAJA,MODIFICACION,ORDENAR,LISTAR,SALIR);
+
+		opcion = getInt("\nIngrese una opción:\t");
+
+		switch(opcion){
+		case ALTA:
+			if(!ingresarEmpleado(arrayEmployees,ELEMENTS,newId)){
+				newId++;
+			} else {
+				printf("No hay espacios disponibles\n");
+			}
+			break;
+		case BAJA:
+			if(eliminarEmpleado(arrayEmployees,ELEMENTS)){
+				printf("No existe ningún empleado con el id ingresado\n");
+			}
+			break;
+		case MODIFICACION:
+			if(modificarEmpleado(arrayEmployees,ELEMENTS)){
+				printf("No existe ningún empleado con el id ingresado\n");
+			}
+			break;
+		case ORDENAR:
+			sortEmployees(arrayEmployees, ELEMENTS, 1);
+			break;
+		case LISTAR:
+			printEmployees(arrayEmployees, ELEMENTS);
+			break;
+		case SALIR:
+			printf("\nFIN\n\n");
+			break;
+		default:
+			printf("Opción inválida");
+			break;
+		}
+	}
 	//r = removeEmployee(arrayEmployees, ELEMENTS,20);
-	r = sortEmployees(arrayEmployees, ELEMENTS, 1);
-	r = printEmployees(arrayEmployees, ELEMENTS);
+	sortEmployees(arrayEmployees, ELEMENTS, 1);
+
 	return EXIT_SUCCESS;
 }
 //https://onlinegdb.com/75njo7rbFg
+//https://onlinegdb.com/bSd7j7WDB
+//https://onlinegdb.com/YiLA9chb2
+//https://onlinegdb.com/X_p7RRLOh

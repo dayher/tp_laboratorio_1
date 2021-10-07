@@ -5,15 +5,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/ArrayEmployees.c \
-../src/TP_2.c 
+../src/TP_2.c \
+../src/utn.c 
 
 OBJS += \
 ./src/ArrayEmployees.o \
-./src/TP_2.o 
+./src/TP_2.o \
+./src/utn.o 
 
 C_DEPS += \
 ./src/ArrayEmployees.d \
-./src/TP_2.d 
+./src/TP_2.d \
+./src/utn.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

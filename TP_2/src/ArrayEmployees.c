@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "utn.h"
 
 /** \brief 	To indicate that all position in the array are empty,
 *			this function put the flag (isEmpty) in TRUE in all
@@ -40,12 +41,12 @@ return 0;
 * \return 	int Return (-1) if Error [Invalid length or NULL pointer or without
 *			free space] - (0) if Ok
 */
-int addEmployee(Employee* list, int len, char name[],char lastName[],float salary,int sector)
+int addEmployee(Employee* list, int len, int id , char name[],char lastName[],float salary,int sector)
 {
 	if(list==NULL ||len<1 ) return -1;
 	for(int i=0;i<len;i++){
 		if(list[i].isEmpty){
-			list[i].id=i+1;
+			list[i].id= id;
 			strcpy(list[i].lastName,lastName);
 			strcpy(list[i].name,name);
 			list[i].salary=salary;
@@ -70,7 +71,7 @@ int findEmployeeById(Employee* list, int len,int id)
 {
 	if(list==NULL ||len<1 ) return -1;
 	for(int i=0; i<len; i++){
-		if(list[i].id==id) return i;
+		if(list[i].id==id && list[i].isEmpty==0) return i;
 	}
 return -1;
 }
@@ -86,13 +87,14 @@ find a employee] - (0) if Ok
 */
 int removeEmployee(Employee* list, int len, int id)
 {
+	int index;
 	if(list==NULL ||len<1 ) return -1;
-		for(int i=0; i<len; i++){
-			if(list[i].id==id) {
-				list[i].isEmpty=1;
-				return 0;
-			}
-		}
+	index = findEmployeeById(list, len , id);
+	if(index>0){
+		list[index].isEmpty=1;
+		return 0;
+	}
+
 return -1;
 }
 
@@ -140,7 +142,72 @@ int printEmployees(Employee* list, int len)
 {
 	if(list==NULL ||len<1 ) return -1;
 	for(int i=0;i<len;i++){
-		printf("{id: %04d, salary: %.2f, sector: %02d, lastName: %s, name: %s}\n",list[i].id,list[i].salary,list[i].sector,list[i].lastName,list[i].name);
+		if(list[i].isEmpty==0)
+		printf("\n{id: %04d, salary: %.2f, sector: %02d, lastName: %s, name: %s}\n",list[i].id,list[i].salary,list[i].sector,list[i].lastName,list[i].name);
 	}
 	return 0;
 }
+
+int ingresarEmpleado(Employee* list, int len, int newId){
+	int sector;
+	char name[51];
+	char lastName[51];
+	float salary;
+
+	getString("Ingrese nombre: ", name);
+	getString("Ingrese apellido: ", lastName);
+	salary = getFloat("Ingrese salario: ");
+	sector = getInt("Ingrese sector: ");
+
+	return addEmployee(list, len, newId, name, lastName, salary, sector);
+}
+
+int eliminarEmpleado(Employee* list, int len){
+	int id;
+	id = getInt("Ingrese id del empleado: ");
+	return removeEmployee(list, len, id);
+}
+
+int modificarEmpleado(Employee* list, int len){
+	int id, index;
+	int sector;
+	char name[51];
+	char lastName[51];
+	float salary;
+
+	if(list==NULL ||len<1 ) return -1;
+
+	id = getInt("Ingrese id del empleado: ");
+	index = findEmployeeById(list, len, id);
+	if(index<0){
+		return -1;
+	} else {
+		getString("Ingrese nombre: ", name);
+		getString("Ingrese apellido: ", lastName);
+		salary = getFloat("Ingrese salario: ");
+		sector = getInt("Ingrese sector: ");
+//Esto debería ser otra función guardarDatosEmpleado(Employee * employee, int index, int id, char name[],char lastName[],float salary,int sector);
+		strcpy(list[index].lastName,lastName);
+		strcpy(list[index].name,name);
+		list[index].salary = salary;
+		list[index].sector = sector;
+		return 0;
+	}
+
+	return -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
