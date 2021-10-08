@@ -20,6 +20,7 @@
 #define MODIFICACION 3
 #define ORDENAR 4
 #define LISTAR 5
+#define SALARIOS 6
 #define SALIR 0
 
 int main(void) {
@@ -37,8 +38,9 @@ int main(void) {
 				"%d) MODIFICACION\n"
 				"%d) ORDENAR\n"
 				"%d) LISTAR\n"
+				"%d) SALARIOS\n"
 				"%d) SALIR\n",
-				ALTA,BAJA,MODIFICACION,ORDENAR,LISTAR,SALIR);
+				ALTA,BAJA,MODIFICACION,ORDENAR,LISTAR,SALARIOS,SALIR);
 
 		opcion = getInt("\nIngrese una opción:\t");
 
@@ -61,10 +63,13 @@ int main(void) {
 			}
 			break;
 		case ORDENAR:
-			sortEmployees(arrayEmployees, ELEMENTS, 1);
+			sortEmployees(arrayEmployees, ELEMENTS, -1);
 			break;
 		case LISTAR:
 			printEmployees(arrayEmployees, ELEMENTS);
+			break;
+		case SALARIOS:
+			calcularSalarioPromedio(arrayEmployees, ELEMENTS);
 			break;
 		case SALIR:
 			printf("\nFIN\n\n");

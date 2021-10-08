@@ -111,7 +111,7 @@ int sortEmployees(Employee* list, int len, int order)
 	if(list==NULL ||len<1 ) return -1;
 	for(int i=1; i<len; i++){
 		for(int j=0; j<len-i; j++){
-			if(strcmp(list[j].lastName,list[j+1].lastName)>0){
+			if((strcmp(list[j].lastName,list[j+1].lastName)*order)>0){
 				temp=list[j];
 				list[j]=list[j+1];
 				list[j+1]=temp;
@@ -138,11 +138,15 @@ return 0;
 */
 int printEmployees(Employee* list, int len)
 {
+	int i, contadorEmpleados=0;
 	if(list==NULL ||len<1 ) return -1;
-	for(int i=0;i<len;i++){
-		if(list[i].isEmpty==0)
-		printf("\n{id: %04d, salary: %.2f, sector: %02d, lastName: %s, name: %s}\n",list[i].id,list[i].salary,list[i].sector,list[i].lastName,list[i].name);
+	for(i=0;i<len;i++){
+		if(list[i].isEmpty==0){
+			contadorEmpleados++;
+			printf("\n{id: %04d, salary: %.2f, sector: %02d, lastName: %s, name: %s}\n",list[i].id,list[i].salary,list[i].sector,list[i].lastName,list[i].name);
+		}
 	}
+	printf("\nTotal Empleados: %d\n",contadorEmpleados);
 	return 0;
 }
 
@@ -197,9 +201,31 @@ int modificarEmpleado(Employee* list, int len){
 
 
 
+int calcularSalarioPromedio(Employee* list, int len){
+	int i,contadorEmpleadosSobrePromedio=0, contadorEmpleados=0;
+	float salarioPromedio=0, acumuladorSalario=0;
 
+	if(list==NULL ||len<1 ) return -1;
 
+	for(i=0;i<len;i++){
+		if(list[i].isEmpty==0){
+			contadorEmpleados++;
+			acumuladorSalario+=list[i].salary;
+			}
+	}
+	if (contadorEmpleados!=0) {
+		salarioPromedio=acumuladorSalario/contadorEmpleados;
+		for(i=0;i<len;i++){
+				if(list[i].isEmpty==0 && list[i].salary > salarioPromedio){
+					contadorEmpleadosSobrePromedio++;
+				}
+			}
+		printf("\nTotal Salarios: %.2f\tSalario Promedio: %.2f\tEmpleados que superan el salario promedio: %d\n",acumuladorSalario,salarioPromedio,contadorEmpleadosSobrePromedio);
+	}
+	printf("\nTotal Empleados: %d\n",contadorEmpleados);
 
+	return 0;
+}
 
 
 
