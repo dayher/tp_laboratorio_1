@@ -31,4 +31,5 @@ int printEmployees(Employee* list, int length);
 int ingresarEmpleado(Employee* list, int len, int newId);
 int modificarEmpleado(Employee* list, int len);
 int eliminarEmpleado(Employee* list, int len);
-int calcularSalarioPromedio(Employee* list, int len);
+int mostrarSalarioPromedio(Employee* list, int len);
+int ordenarEmpleadosApellidoSector(Employee* list, int len);

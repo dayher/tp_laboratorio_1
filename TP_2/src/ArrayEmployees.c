@@ -201,7 +201,7 @@ int modificarEmpleado(Employee* list, int len){
 
 
 
-int calcularSalarioPromedio(Employee* list, int len){
+int mostrarSalarioPromedio(Employee* list, int len){
 	int i,contadorEmpleadosSobrePromedio=0, contadorEmpleados=0;
 	float salarioPromedio=0, acumuladorSalario=0;
 
@@ -225,6 +225,16 @@ int calcularSalarioPromedio(Employee* list, int len){
 	printf("\nTotal Empleados: %d\n",contadorEmpleados);
 
 	return 0;
+}
+
+int ordenarEmpleadosApellidoSector(Employee* list, int len){
+	int order;
+
+	if(list==NULL ||len<1 ) return -1;
+
+	order = getInt("\nIngrese orden: (1) --> A-Z  ó (-1) -->  Z-A\t:");
+
+	return sortEmployees(list,len,order);
 }
 
 

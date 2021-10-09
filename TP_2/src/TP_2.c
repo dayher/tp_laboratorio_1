@@ -24,7 +24,7 @@
 #define SALIR 0
 
 int main(void) {
-	size_t opcion;
+	size_t opcion=1;
 	int newId=1000;
 
 	Employee arrayEmployees[ELEMENTS];
@@ -48,6 +48,7 @@ int main(void) {
 		case ALTA:
 			if(!ingresarEmpleado(arrayEmployees,ELEMENTS,newId)){
 				newId++;
+				printf("\nAlta exitosa\n");
 			} else {
 				printf("No hay espacios disponibles\n");
 			}
@@ -55,21 +56,26 @@ int main(void) {
 		case BAJA:
 			if(eliminarEmpleado(arrayEmployees,ELEMENTS)){
 				printf("No existe ningún empleado con el id ingresado\n");
+			} else {
+				printf("\nBaja exitosa\n");
 			}
 			break;
 		case MODIFICACION:
 			if(modificarEmpleado(arrayEmployees,ELEMENTS)){
 				printf("No existe ningún empleado con el id ingresado\n");
+			} else {
+				printf("\nModificacion exitosa\n");
 			}
 			break;
 		case ORDENAR:
-			sortEmployees(arrayEmployees, ELEMENTS, -1);
+			ordenarEmpleadosApellidoSector(arrayEmployees, ELEMENTS);
+			printEmployees(arrayEmployees, ELEMENTS);
 			break;
 		case LISTAR:
 			printEmployees(arrayEmployees, ELEMENTS);
 			break;
 		case SALARIOS:
-			calcularSalarioPromedio(arrayEmployees, ELEMENTS);
+			mostrarSalarioPromedio(arrayEmployees, ELEMENTS);
 			break;
 		case SALIR:
 			printf("\nFIN\n\n");
