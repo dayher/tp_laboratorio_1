@@ -8,8 +8,9 @@
 #ifndef ARRAYEMPLOYEES_H_
 #define ARRAYEMPLOYEES_H_
 
-
-
+#define MAX_SALARY 1000000
+#define MAX_SECTOR 1000
+#define MAX_ID 10000000
 #endif /* ARRAYEMPLOYEES_H_ */
 
 struct

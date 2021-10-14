@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "ArrayEmployees.h"
-#include "utn.h"
+#include "input.h"
 
 #define ELEMENTS 3
 #define ALTA 1
@@ -21,10 +21,11 @@
 #define ORDENAR 4
 #define LISTAR 5
 #define SALARIOS 6
+#define MAX_MENU 10
 #define SALIR 0
 
 int main(void) {
-	size_t opcion=1;
+	size_t opcion=MAX_MENU;
 	int newId=1000;
 
 	Employee arrayEmployees[ELEMENTS];
@@ -42,7 +43,7 @@ int main(void) {
 				"%d) SALIR\n",
 				ALTA,BAJA,MODIFICACION,ORDENAR,LISTAR,SALARIOS,SALIR);
 
-		opcion = getInt("\nIngrese una opción:\t");
+		opcion = getInt("\nIngrese una opción:\t",SALIR,MAX_MENU);
 
 		switch(opcion){
 		case ALTA:

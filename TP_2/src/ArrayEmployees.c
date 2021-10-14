@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "utn.h"
+#include "input.h"
 
 /** \brief 	To indicate that all position in the array are empty,
 *			this function put the flag (isEmpty) in TRUE in all
@@ -140,10 +140,12 @@ int printEmployees(Employee* list, int len)
 {
 	int i, contadorEmpleados=0;
 	if(list==NULL ||len<1 ) return -1;
+
+	printf("\n%4s%8s%10s%20s%20s\n","ID","SECTOR","SALARY","LASTNAME","NAME");
 	for(i=0;i<len;i++){
 		if(list[i].isEmpty==0){
 			contadorEmpleados++;
-			printf("\n{id: %04d, salary: %.2f, sector: %02d, lastName: %s, name: %s}\n",list[i].id,list[i].salary,list[i].sector,list[i].lastName,list[i].name);
+			printf("\n%04d \t %02d \t%.2f %20s %20s\n",list[i].id,list[i].sector,list[i].salary,list[i].lastName,list[i].name);
 		}
 	}
 	printf("\nTotal Empleados: %d\n",contadorEmpleados);
@@ -156,17 +158,17 @@ int ingresarEmpleado(Employee* list, int len, int newId){
 	char lastName[51];
 	float salary;
 
-	getString("Ingrese nombre: ", name);
-	getString("Ingrese apellido: ", lastName);
-	salary = getFloat("Ingrese salario: ");
-	sector = getInt("Ingrese sector: ");
+	while(!getStringLetras("Ingrese nombre: ", name));
+	while(!getStringLetras("Ingrese apellido: ", lastName));
+	salary = getFloat("Ingrese salario: ",0,MAX_SALARY);
+	sector = getInt("Ingrese sector: ",0,MAX_SECTOR);
 
 	return addEmployee(list, len, newId, name, lastName, salary, sector);
 }
 
 int eliminarEmpleado(Employee* list, int len){
 	int id;
-	id = getInt("Ingrese id del empleado: ");
+	id = getInt("Ingrese id del empleado: ",0,MAX_ID);
 	return removeEmployee(list, len, id);
 }
 
@@ -179,15 +181,15 @@ int modificarEmpleado(Employee* list, int len){
 
 	if(list==NULL ||len<1 ) return -1;
 
-	id = getInt("Ingrese id del empleado: ");
+	id = getInt("Ingrese id del empleado: ",0,MAX_ID);
 	index = findEmployeeById(list, len, id);
 	if(index<0){
 		return -1;
 	} else {
 		getString("Ingrese nombre: ", name);
 		getString("Ingrese apellido: ", lastName);
-		salary = getFloat("Ingrese salario: ");
-		sector = getInt("Ingrese sector: ");
+		salary = getFloat("Ingrese salario: ",0,MAX_SALARY);
+		sector = getInt("Ingrese sector: ",0,MAX_SECTOR);
 //Esto debería ser otra función guardarDatosEmpleado(Employee * employee, int index, int id, char name[],char lastName[],float salary,int sector);
 		strcpy(list[index].lastName,lastName);
 		strcpy(list[index].name,name);
@@ -232,7 +234,7 @@ int ordenarEmpleadosApellidoSector(Employee* list, int len){
 
 	if(list==NULL ||len<1 ) return -1;
 
-	order = getInt("\nIngrese orden: (1) --> A-Z  ó (-1) -->  Z-A\t:");
+	order = getInt("\nIngrese orden: (1) --> A-Z  ó (-1) -->  Z-A\t:",-1,1);
 
 	return sortEmployees(list,len,order);
 }

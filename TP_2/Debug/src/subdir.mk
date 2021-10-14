@@ -6,17 +6,17 @@
 C_SRCS += \
 ../src/ArrayEmployees.c \
 ../src/TP_2.c \
-../src/utn.c 
+../src/input.c 
 
 OBJS += \
 ./src/ArrayEmployees.o \
 ./src/TP_2.o \
-./src/utn.o 
+./src/input.o 
 
 C_DEPS += \
 ./src/ArrayEmployees.d \
 ./src/TP_2.d \
-./src/utn.d 
+./src/input.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
