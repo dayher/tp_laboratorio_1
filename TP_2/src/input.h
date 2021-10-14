@@ -2,7 +2,7 @@
  * input.h
  *
  *  Created on: 9 oct. 2021
- *      Author: dayher
+ *  Author: Dayher Marchan
  */
 
 #ifndef INPUT_H_

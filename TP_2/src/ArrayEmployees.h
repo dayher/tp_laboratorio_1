@@ -2,7 +2,7 @@
  * ArrayEmployees.h
  *
  *  Created on: 18 sep. 2021
- *      Author: dayher
+ *  Author: Dayher Marchan
  */
 
 #ifndef ARRAYEMPLOYEES_H_

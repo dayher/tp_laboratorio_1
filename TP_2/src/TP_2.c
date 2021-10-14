@@ -2,7 +2,7 @@
  ============================================================================
  Name        : TP_2.c
  Author      : Dayher Marchan
- Version     :
+ Version     : 1.0
  Copyright   : 
  Description : 	Una empresa requiere un sistema para administrar su nómina de empleados.
  	 	 	 	Se sabe que dicha nómina bajo ninguna circunstancia superara los 1000 empleados.
@@ -14,7 +14,7 @@
 #include "ArrayEmployees.h"
 #include "input.h"
 
-#define ELEMENTS 3
+#define ELEMENTS 1000
 #define ALTA 1
 #define BAJA 2
 #define MODIFICACION 3
@@ -27,11 +27,10 @@
 int main(void) {
 	size_t opcion=MAX_MENU;
 	int newId=1000;
-
 	Employee arrayEmployees[ELEMENTS];
+
 	initEmployees(arrayEmployees, ELEMENTS);
 
-	//MENU
 	while(opcion!=SALIR){
 		printf("\n"
 				"%d) ALTA\n"
@@ -89,7 +88,3 @@ int main(void) {
 
 	return EXIT_SUCCESS;
 }
-//https://onlinegdb.com/75njo7rbFg
-//https://onlinegdb.com/bSd7j7WDB
-//https://onlinegdb.com/YiLA9chb2
-//https://onlinegdb.com/X_p7RRLOh
