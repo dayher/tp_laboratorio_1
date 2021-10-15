@@ -25,8 +25,10 @@
 #define SALIR 0
 
 int main(void) {
-	size_t opcion=MAX_MENU;
+	int opcion=MAX_MENU;
 	int newId=1000;
+	int cantidadAltas=0;
+	int cantidadBajas=0;
 	Employee arrayEmployees[ELEMENTS];
 
 	initEmployees(arrayEmployees, ELEMENTS);
@@ -49,39 +51,62 @@ int main(void) {
 			if(!ingresarEmpleado(arrayEmployees,ELEMENTS,newId)){
 				newId++;
 				printf("\nAlta exitosa\n");
+				cantidadAltas++;
 			} else {
 				printf("No hay espacios disponibles\n");
 			}
 			break;
 		case BAJA:
-			if(eliminarEmpleado(arrayEmployees,ELEMENTS)){
-				printf("No existe ningún empleado con el id ingresado\n");
+			if(cantidadAltas==cantidadBajas){
+				printf("\nNo hay Altas en el sistema\n");
 			} else {
-				printf("\nBaja exitosa\n");
+				if(eliminarEmpleado(arrayEmployees,ELEMENTS)){
+					printf("No existe ningún empleado con el id ingresado\n");
+				} else {
+					printf("\nBaja exitosa\n");
+					cantidadBajas++;
+				}
 			}
 			break;
 		case MODIFICACION:
-			if(modificarEmpleado(arrayEmployees,ELEMENTS)){
-				printf("No existe ningún empleado con el id ingresado\n");
+			if(cantidadAltas==cantidadBajas){
+				printf("\nNo hay Altas en el sistema\n");
 			} else {
-				printf("\nModificacion exitosa\n");
+				if(modificarEmpleado(arrayEmployees,ELEMENTS)){
+					printf("No existe ningún empleado con el id ingresado\n");
+				} else {
+					printf("\nModificacion exitosa\n");
+				}
 			}
 			break;
 		case ORDENAR:
-			ordenarEmpleadosApellidoSector(arrayEmployees, ELEMENTS);
-			printEmployees(arrayEmployees, ELEMENTS);
+			if(cantidadAltas==cantidadBajas){
+				printf("\nNo hay Altas en el sistema\n");
+			} else {
+				ordenarEmpleadosApellidoSector(arrayEmployees, ELEMENTS);
+				printEmployees(arrayEmployees, ELEMENTS);
+			}
 			break;
 		case LISTAR:
-			printEmployees(arrayEmployees, ELEMENTS);
+			if(cantidadAltas==cantidadBajas){
+				printf("\nNo hay Altas en el sistema\n");
+			} else {
+				printEmployees(arrayEmployees, ELEMENTS);
+			}
 			break;
+
 		case SALARIOS:
-			mostrarSalarioPromedio(arrayEmployees, ELEMENTS);
+			if(cantidadAltas==cantidadBajas){
+				printf("\nNo hay Altas en el sistema\n");
+			} else {
+				mostrarSalarioPromedio(arrayEmployees, ELEMENTS);
+			}
 			break;
 		case SALIR:
 			printf("\nFIN\n\n");
 			break;
 		default:
-			printf("Opción inválida");
+			printf("\nOpción inválida\n");
 			break;
 		}
 	}
