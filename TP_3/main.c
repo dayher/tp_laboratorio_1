@@ -3,6 +3,10 @@
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Employee.h"
+#include "input.h"
+#include <string.h>
+
+#define SALIR 10
 
 /****************************************************
     Menu:
@@ -18,21 +22,67 @@
     10. Salir
 *****************************************************/
 
-
-
 int main()
 {
-    int option = 0;
 
-    LinkedList* listaEmpleados = ll_newLinkedList();
-    do{
-        switch(option)
-        {
-            case 1:
-                controller_loadFromText("data.csv",listaEmpleados);
-                break;
-        }
-    }while(option != 10);
+
+	int opcion = 0;
+
+	LinkedList* listaEmpleados = ll_newLinkedList();
+/*
+	controller_loadFromText("data.csv",listaEmpleados);
+
+	fflush(NULL);
+
+	employee_listPrint(listaEmpleados);
+
+*/
+
+    opcion = getInt("Ingrese una opcion\n",1,10);
+
+
+    while(opcion!=SALIR){
+    	switch(opcion){
+    				case 1:
+    					controller_loadFromText("data.csv",listaEmpleados); // validar carga y no cargar 2 veces el mismo archivo
+    					break;
+    				case 2:
+    					printf("Proximamente opcion 2!\n");
+    					break;
+    				case 3:
+    					printf("Proximamente opcion 3!\n");
+    					break;
+    				case 4:
+    					printf("Proximamente opcion 4!\n");
+    					break;
+    				case 5:
+    					printf("Proximamente opcion 5!\n");
+    					break;
+    				case 6: // validar que se haya cargado en opcion 1 o 2
+    					employee_listPrint(listaEmpleados);
+    					break;
+    				case 7:
+    					employee_listSort(listaEmpleados);
+    					break;
+    				case 8:
+    					controller_saveAsText("./prueba2.csv", listaEmpleados);
+    					break;
+    				case 9:
+    					break;
+    				case SALIR: //liberar memoria!
+    					printf("\nSalir\n");
+    					break;
+    				default:
+    					printf("\nOpcion Invalida\n");
+    					break;
+    			}
+    	opcion = getInt("Ingrese una opcion\n",1,10);
+    }
+
+
+	puts("Ingrese una letra: ");
+	char c = getchar();
+	printf("letra ingresadaa : %c\n", c);
     return 0;
 }
 
