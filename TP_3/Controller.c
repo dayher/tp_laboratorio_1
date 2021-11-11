@@ -16,7 +16,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
 	FILE * pFile;
 
-	pFile = fopen(path,"rt");
+	pFile = fopen(path,"r");
 
 	parser_EmployeeFromText(pFile, pArrayListEmployee);
 
@@ -34,7 +34,15 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+	FILE * pFile;
+
+	pFile = fopen(path,"rb"); // validar
+
+	parser_EmployeeFromBinary(pFile, pArrayListEmployee);
+
+	fclose(pFile); //validar
+
+    return 0;
 }
 
 /** \brief Alta de empleados
@@ -184,7 +192,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
     int id, sueldo, hs;
     char nombre[128];
 
-    pFile = fopen(path, "wt");
+    pFile = fopen(path, "w");
 
     while((aux = (Employee *)ll_get(pArrayListEmployee, i)) != NULL && i<11){
     	employee_getNombre(aux, nombre);
@@ -209,6 +217,21 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
+	FILE * pFile;
+	int i;
+
+    Employee * aux;
+
+	pFile = fopen(path,"w"); // validar
+
+    while((aux = (Employee *)ll_get(pArrayListEmployee, i)) != NULL && i<11){
+
+    	fwrite(aux,sizeof(Employee),1,pFile); //		refactorizar para que sea funcion imprimir un empleado IGUAL QUE EN LA  OTRA FUNCION
+    	i++;
+    }
+
+	fclose(pFile); //validar
+
     return 0;
 }
 
