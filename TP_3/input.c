@@ -141,14 +141,14 @@ void getString(char mensaje[],char input[])
 {
 	size_t i = 0;
 	char c;
-	fflush(stdout);
+
 	fflush(stdin);
     printf("%s",mensaje);
+    fflush(stdout);
     while((c = getchar()) !=EOF && c!='\n' && i<256){
     	input[i++]=c;
     }
     input[i]='\0';
-    putchar('\n');
 }
 
 /**

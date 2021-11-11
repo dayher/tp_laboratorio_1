@@ -26,10 +26,6 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas);
 int employee_setSueldo(Employee* this,int sueldo);
 int employee_getSueldo(Employee* this,int* sueldo);
 
-int employee_listPrint(LinkedList * list);
-int employee_listSaveText(FILE * pFile, LinkedList * list);
-
-int employee_listSort(LinkedList * list);
 int employee_compareByName(void * primero, void * segundo);
 
 #endif // employee_H_INCLUDED

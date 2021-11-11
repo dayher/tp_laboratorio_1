@@ -24,19 +24,9 @@
 
 int main()
 {
-
-
 	int opcion = 0;
 
 	LinkedList* listaEmpleados = ll_newLinkedList();
-/*
-	controller_loadFromText("data.csv",listaEmpleados);
-
-	fflush(NULL);
-
-	employee_listPrint(listaEmpleados);
-
-*/
 
     opcion = getInt("Ingrese una opcion\n",1,10);
 
@@ -47,22 +37,23 @@ int main()
     					controller_loadFromText("data.csv",listaEmpleados); // validar carga y no cargar 2 veces el mismo archivo
     					break;
     				case 2:
-    					printf("Proximamente opcion 2!\n");
+    					controller_addEmployee(listaEmpleados);
     					break;
     				case 3:
     					printf("Proximamente opcion 3!\n");
     					break;
     				case 4:
-    					printf("Proximamente opcion 4!\n");
+    					controller_removeEmployee(listaEmpleados);
     					break;
     				case 5:
-    					printf("Proximamente opcion 5!\n");
+    					controller_editEmployee(listaEmpleados);
     					break;
+
     				case 6: // validar que se haya cargado en opcion 1 o 2
-    					employee_listPrint(listaEmpleados);
+    					controller_ListEmployee(listaEmpleados);
     					break;
     				case 7:
-    					employee_listSort(listaEmpleados);
+    					controller_sortEmployee(listaEmpleados);
     					break;
     				case 8:
     					controller_saveAsText("./prueba2.csv", listaEmpleados);
@@ -79,10 +70,6 @@ int main()
     	opcion = getInt("Ingrese una opcion\n",1,10);
     }
 
-
-	puts("Ingrese una letra: ");
-	char c = getchar();
-	printf("letra ingresadaa : %c\n", c);
     return 0;
 }
 

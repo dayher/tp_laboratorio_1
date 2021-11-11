@@ -60,45 +60,6 @@ int employee_getSueldo(Employee* this,int* sueldo){
 	return 0;
 }
 
-int employee_listPrint(LinkedList * list){
-	Employee * aux;
-	char nombre[128];
-    int i=0;
-    while((aux = ll_get(list, i)) != NULL && i<11){
-    	employee_getNombre(aux, nombre);
-    	printf("%s\n", nombre); //		refactorizar para que sea funcion imprimir un empleado
-    	printf("Imprimir un empleado\n");
-    	i++;
-    }
-	return 1;
-}
-int employee_listSaveText(FILE * pFile, LinkedList * list){
-	Employee * aux;
-    int i=0;
-    int id, sueldo, hs;
-    char nombre[128];
-
-    while((aux = ll_get(list, i)) != NULL && i<11){
-    	employee_getNombre(aux, nombre);
-    	employee_getId(aux, &id);
-    	employee_getSueldo(aux, &sueldo);
-    	employee_getHorasTrabajadas(aux, &hs);
-    	fprintf(pFile, "%d,%s,%d,%d\n",id,nombre,hs,sueldo);
-    	i++;
-    }
-	return 1;
-}
-
-int employee_listSort(LinkedList * list){
-	int order;
-
-	order = 1;//getInt("\nIngrese orden: ", -1,1);
-
-	ll_sort(list, &employee_compareByName, order);
-
-	return 1;
-}
-
 int employee_compareByName(void * primero, void * segundo){
 
 	char nombre1[128], nombre2[128];

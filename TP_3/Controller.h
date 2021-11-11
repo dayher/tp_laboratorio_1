@@ -10,3 +10,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee);
 
 
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee);
+
+int employee_listSaveText(FILE * pFile, LinkedList * list);
+
+int employee_listSort(LinkedList * list);
