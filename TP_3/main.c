@@ -6,68 +6,122 @@
 #include "input.h"
 #include <string.h>
 
-#define SALIR 10
-
-/****************************************************
-    Menu:
-     1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
-     2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).
-     3. Alta de empleado
-     4. Modificar datos de empleado
-     5. Baja de empleado
-     6. Listar empleados
-     7. Ordenar empleados
-     8. Guardar los datos de los empleados en el archivo data.csv (modo texto).
-     9. Guardar los datos de los empleados en el archivo data.csv (modo binario).
-    10. Salir
-*****************************************************/
-
 int main()
 {
 	int opcion = 0;
 
 	LinkedList* listaEmpleados = ll_newLinkedList();
 
-    opcion = getInt("Ingrese una opcion\n",1,10);
+    while(opcion!=10){
 
+        printf("\n\t\t\tMENU\n"
+        		"______________________________________________________________________________\n\n"
+        		"1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).\n"
+        		"2. Cargar los datos de los empleados desde el archivo data.csv (modo binario).\n"
+        		"3. Alta de empleado\n"
+        		"4. Modificar datos de empleado\n"
+        		"5. Baja de empleado\n"
+        		"6. Listar empleados\n"
+        		"7. Ordenar empleados\n"
+        		"8. Guardar los datos de los empleados en el archivo data.csv (modo texto).\n"
+        		"9. Guardar los datos de los empleados en el archivo data.csv (modo binario).\n"
+        		"10. Salir\n"
+        		"______________________________________________________________________________\n");
+        opcion = getInt("\nIngrese una opcion:\t",1,10);
 
-    while(opcion!=SALIR){
     	switch(opcion){
     				case 1:
-    					controller_loadFromText("data.csv",listaEmpleados); // validar carga y no cargar 2 veces el mismo archivo
+    					if(!controller_loadFromText("data.csv",listaEmpleados)){
+    						printf("\nCARGA EXITOSA\n");
+    					} else {
+    						printf("\nCARGA FALLIDA\n");
+    					}
     					break;
     				case 2:
-    					controller_addEmployee(listaEmpleados);
+    					if(!controller_loadFromBinary("bindata.bin",listaEmpleados)){
+    						printf("\nCARGA EXITOSA\n");
+    					} else {
+    						printf("\nCARGA FALLIDA\n");
+    					}
     					break;
     				case 3:
-    					printf("Proximamente opcion 3!\n");
+    					if(!controller_addEmployee(listaEmpleados)){
+    						printf("\nALTA EXITOSA\n");
+    					} else {
+    						printf("\nALTA FALLIDA\n");
+    					}
     					break;
     				case 4:
-    					controller_removeEmployee(listaEmpleados);
+    					if(ll_len(listaEmpleados)<1){
+    						printf("\nSIN ALTAS EN EL SISTEMA\n");
+    						break;
+    					}
+    					if(!controller_editEmployee(listaEmpleados)){
+    						printf("\nMODIFICACION EXITOSA\n");
+    					} else {
+    						printf("\nMODIFICACION CANCELADA\n");
+    					}
     					break;
     				case 5:
-    					controller_editEmployee(listaEmpleados);
+    					if(ll_len(listaEmpleados)<1){
+    						printf("\nSIN ALTAS EN EL SISTEMA\n");
+    						break;
+    					}
+    					if(!controller_removeEmployee(listaEmpleados)){
+    						printf("\nBAJA EXITOSA\n");
+    					} else {
+    						printf("\nBAJA CANCELADA\n");
+    					}
     					break;
-
-    				case 6: // validar que se haya cargado en opcion 1 o 2
+    				case 6:
+    					if(ll_len(listaEmpleados)<1){
+    						printf("\nSIN ALTAS EN EL SISTEMA\n");
+    						break;
+    					}
     					controller_ListEmployee(listaEmpleados);
     					break;
     				case 7:
+    					if(ll_len(listaEmpleados)<1){
+    						printf("\nSIN ALTAS EN EL SISTEMA\n");
+    						break;
+    					}
     					controller_sortEmployee(listaEmpleados);
+    					controller_ListEmployee(listaEmpleados);
     					break;
     				case 8:
-    					controller_saveAsText("./prueba2.csv", listaEmpleados);
+    					if(ll_len(listaEmpleados)<1){
+    						printf("\nSIN ALTAS EN EL SISTEMA\n");
+    						break;
+    					}
+    					if(!controller_saveAsText("./prueba2.csv", listaEmpleados)){
+    						printf("\nCARGA EXITOSA\n");;
+    					} else {
+    						printf("\nCARGA FALLIDA\n");
+    					}
     					break;
     				case 9:
+    					if(ll_len(listaEmpleados)<1){
+    						printf("\nSIN ALTAS EN EL SISTEMA\n");
+    						break;
+    					}
+    					if(!controller_saveAsBinary("bindata.bin", listaEmpleados)){
+    						printf("\nCARGA EXITOSA\n");
+    					} else {
+    						printf("\nCARGA FALLIDA\n");
+    					}
     					break;
-    				case SALIR: //liberar memoria!
-    					printf("\nSalir\n");
+    				case 10:
+    					ll_deleteLinkedList(listaEmpleados);
+    					printf("\n______________________________________________________________________________\n"
+    							"\t\t\tFIN DEL PROGRAMA\n"
+    							"______________________________________________________________________________\n");
+
     					break;
     				default:
     					printf("\nOpcion Invalida\n");
+
     					break;
     			}
-    	opcion = getInt("Ingrese una opcion\n",1,10);
     }
 
     return 0;
