@@ -353,6 +353,12 @@ int ll_push(LinkedList* this, int index, void* pElement)
 {
     int returnAux = -1;
 
+    if(this != NULL){
+    	if((addNode(this, index, pElement))==0){
+    		returnAux = 0;
+    	}
+    }
+
     return returnAux;
 }
 
@@ -368,6 +374,12 @@ int ll_push(LinkedList* this, int index, void* pElement)
 void* ll_pop(LinkedList* this,int index)
 {
     void* returnAux = NULL;
+
+    if(this != NULL){
+    	if((returnAux = ll_get(this, index))!= NULL){
+    		ll_remove(this, index);
+    	}
+    }
 
     return returnAux;
 }
@@ -385,6 +397,14 @@ int ll_contains(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
 
+    if(this != NULL){
+    	if(ll_indexOf(this, pElement) >=0){
+    		returnAux=1;
+    	} else {
+    		returnAux=0;
+    	}
+    }
+
     return returnAux;
 }
 
@@ -400,6 +420,31 @@ int ll_contains(LinkedList* this, void* pElement)
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
+    int i=0;
+    int len1;
+    int len2;
+
+    if(this!=NULL && this2!=NULL){
+
+        len1 = ll_len(this);
+        len2 = ll_len(this2);
+
+    	if(len1>=len2){
+    		while(i<len2){
+				if(!ll_contains(this, ll_get(this2, i++))){
+					break;
+				}
+			}
+			if(i==len2){
+				returnAux = 1;
+			}else{
+				returnAux = 0;
+			}
+    	} else {
+    		returnAux = 0;
+    	}
+
+    }
 
     return returnAux;
 }
@@ -418,6 +463,27 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
 
+    if(this != NULL && from>=0 )
+    {
+    	if( to>from && to<=ll_len(this))
+    	{
+			if((cloneArray = ll_newLinkedList()) != NULL)
+			{
+				while(from<to)
+				{
+					if(ll_add(cloneArray, ll_get(this, from))) {
+						break;
+					}
+					from++;
+				}
+				if(from<to)
+				{
+					ll_deleteLinkedList(cloneArray);
+				}
+			}
+    	}
+    }
+
     return cloneArray;
 }
 
@@ -432,6 +498,10 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
+
+    if( this != NULL){
+    	cloneArray = ll_subList(this, 0, ll_len(this));
+    }
 
     return cloneArray;
 }
