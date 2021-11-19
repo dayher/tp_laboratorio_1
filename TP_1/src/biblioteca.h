@@ -17,3 +17,11 @@ double restar(double a, double b);
 double multiplicar(double a, double b);
 double dividir(double a, double b);
 unsigned long factorial(unsigned n);
+
+void mostrarMenu(double primero, double segundo);
+void mostrarResultados(	double primero, double segundo ,
+						double suma, double resta, double producto, double cociente,
+						unsigned long factorial1, unsigned long factorial2);
+void calcularResultados(double primero, double segundo ,
+						double *suma, double *resta, double *producto, double *cociente,
+						unsigned long *factorial1, unsigned long *factorial2);
