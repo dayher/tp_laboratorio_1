@@ -25,20 +25,23 @@ void calcularResultados(double primero, double segundo ,
 						double* suma, double *resta, double* producto, double* cociente,
 						unsigned long* factorial1, unsigned long* factorial2)
 {
-	*suma = sumar(primero, segundo);
-	*resta = restar(primero, segundo);
-	*producto = multiplicar(primero, segundo);
+	if(suma!=NULL && resta!=NULL && producto!=NULL && cociente!=NULL && factorial1!=NULL && factorial2!=NULL)
+	{
+		*suma = sumar(primero, segundo);
+		*resta = restar(primero, segundo);
+		*producto = multiplicar(primero, segundo);
 
-	if (segundo){
-		(*cociente) = dividir(primero, segundo);
+		if (segundo){
+			(*cociente) = dividir(primero, segundo);
+		}
+		if(!(primero-(unsigned)primero || primero<0 || primero>15)){
+			*factorial1 = factorial((unsigned)primero);
+		}
+		if(!(segundo-(unsigned)segundo || segundo<0 || segundo>15)){
+			*factorial2 = factorial((unsigned)segundo);
+		}
+		printf("\n\nCalculos realizados\n");
 	}
-	if(!(primero-(unsigned)primero || primero<0 || primero>15)){
-		*factorial1 = factorial((unsigned)primero);
-	}
-	if(!(segundo-(unsigned)segundo || segundo<0 || segundo>15)){
-		*factorial2 = factorial((unsigned)segundo);
-	}
-	printf("\n\nCalculos realizados\n");
 }
 
 void mostrarResultados(	double primero, double segundo ,
