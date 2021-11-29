@@ -34,7 +34,6 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
-	printf("No logre que leyera binarios, se rompe al leer en eclipse en windows. Todo lo demas anda\n");
 	FILE * pFile;
 
 	if((pFile = fopen(path,"rb"))==NULL) return 1;

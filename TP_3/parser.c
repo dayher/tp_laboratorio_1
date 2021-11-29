@@ -40,37 +40,28 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
  */
 int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 {
-	int id, hs, sueldo;
-	char idStr[50], nombre[50], hsStr[50], sueldoStr[50];
-	Employee * newEmployee;
-	char buffer[2];
+	int retorno;
+	Employee *aux;
 
-	 if (pFile==NULL || pArrayListEmployee==NULL) return 1;
-
-	while(!feof(pFile)){
-		fflush(NULL);
-		if((fread(&id,sizeof(int),1,pFile))!=1) return 1;
-
-		if((fread(buffer,sizeof(char),1,pFile))!=1) return 1;
-
-		if((fread(nombre,sizeof(char),128,pFile))!=128) return 1;
-
-		if((fread(buffer,sizeof(char),1,pFile))!=1)return 1;
-
-		if((fread(&hs,sizeof(int),1,pFile))!=1)return 1;
-
-		if((fread(buffer,sizeof(char),1,pFile))!=1)return 1;
-
-		if((fread(&sueldo,sizeof(int),1,pFile))!=1) return 1;
-
-		itoa(id, idStr, 10);
-		itoa(hs, hsStr, 10 );
-		itoa(sueldo, sueldoStr, 10);
-
-		newEmployee = employee_newParametros(idStr, nombre, hsStr, sueldoStr);
-		ll_add(pArrayListEmployee, newEmployee);
+	retorno = -1;
+	if(pFile != NULL && pArrayListEmployee != NULL)
+	{
+		retorno = 0;
+		while(!feof(pFile))
+		{
+			aux = employee_new();
+			fread(aux, sizeof(Employee), 1, pFile);
+			if(feof(pFile))
+			{
+				break;
+			}
+			else
+			{
+				ll_add(pArrayListEmployee, aux);
+			}
+		}
 	}
-    return 0;
+	return retorno;
 }
 
 /** \brief Parsea los datos de la lista de Empleados al achivo de texto.
@@ -108,39 +99,25 @@ int parser_TextFromEmployee(FILE* pFile , LinkedList* pArrayListEmployee){
  */
 int parser_BinaryFromEmployee(FILE* pFile , LinkedList* pArrayListEmployee)
 {
-	int i =0;
-	int id, hs, sueldo;
-	char nombre [128];
-	char delimitter[] = ",";
+	int retorno;
+	Employee *aux;
+	int len;
 
-    Employee * aux;
-
-    if (pFile==NULL || pArrayListEmployee==NULL) return 1;
-
-   while(((aux = (Employee *)ll_get(pArrayListEmployee, i)) != NULL))
-   {
-		employee_getNombre(aux, nombre);
-		employee_getId(aux, &id);
-		employee_getSueldo(aux, &sueldo);
-		employee_getHorasTrabajadas(aux, &hs);
-
-		fwrite(&id,sizeof(int),1,pFile);
-
-		fwrite(delimitter,sizeof(char),1,pFile);
-
-		fwrite(nombre,sizeof(char),128,pFile);
-
-		fwrite(delimitter,sizeof(char),1,pFile);
-
-		fwrite(&hs,sizeof(int),1,pFile);
-
-		fwrite(delimitter,sizeof(char),1,pFile);
-
-		fwrite(&sueldo,sizeof(int),1,pFile);
-
-		i++;
+	retorno = -1;
+	if(pFile != NULL && pArrayListEmployee != NULL)
+	{
+		len = ll_len(pArrayListEmployee);
+		retorno = 0;
+		for(int i = 0; i <len; i++)
+		{
+			aux = ll_get(pArrayListEmployee, i);
+			if(aux != NULL)
+			{
+				fwrite(aux, sizeof(Employee), 1, pFile);
+			}
+		}
 	}
-	return 0;
+	return retorno;
 }
 
 
